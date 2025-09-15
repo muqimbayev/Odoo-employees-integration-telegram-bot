@@ -1,0 +1,25 @@
+<record id="view_hr_employee_form_inherit_benefits" model="ir.ui.view">
+    <field name="name">hr.employee.form.benefits</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+        <notebook position="inside">
+            <page string="Benefits">
+                <field name="benefit_ids">
+                    <list>
+                        <field name="benefit_id"/>
+                        <field name="state"/>
+                    </list>
+                    <form>
+                        <group>
+                            <field name="benefit_id"/>
+                            <field name="state"/>
+                            <field name="approved_by"/>
+                            <field name="approved_date"/>
+                        </group>
+                    </form>
+                </field>
+            </page>
+        </notebook>
+    </field>
+</record>

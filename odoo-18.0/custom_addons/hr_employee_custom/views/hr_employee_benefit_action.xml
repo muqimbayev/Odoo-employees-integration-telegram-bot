@@ -1,0 +1,75 @@
+<odoo>
+
+    <record id="employee_benefit_views_list" model="ir.ui.view">
+        <field name="name">employee.benefit.list</field>
+        <field name="model">hr.employee.benefit</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="benefit_type"/>
+                <field name="eligibility_start"/>
+                <field name="eligibility_end"/>
+                <field name="requires_approval"/>
+            </list>
+        </field>
+    </record>
+    <record id="employee_benefit_views_form" model="ir.ui.view">
+        <field name="name">employee.benefit.form</field>
+        <field name="model">hr.employee.benefit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <div class="oe_button_box" name="button_box">
+
+    <button name="count_submitted_button" type="object"
+        class="oe_stat_button" icon="fa-file">
+        <field name="count_submitted" widget="statinfo" string="Tasdiqlanishi kerak"/>
+    </button>
+
+    <button name="count_approved_button" type="object"
+        class="oe_stat_button" icon="fa-check-circle">
+        <field name="count_approved" widget="statinfo" string="Tasdiqlanganlar"/>
+    </button>
+
+    <button name="count_rejected_button" type="object"
+        class="oe_stat_button" icon="fa-times-circle">
+        <field name="count_rejected" widget="statinfo" string="Rad etilganlar"/>
+    </button>
+
+</div>
+
+
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="benefit_type"/>
+                        <field name="eligibility_start"/>
+                        <field name="eligibility_end"/>
+                        <field name="is_active" widget="boolean_toggle"/>
+                        <field name="notes"/>
+                        <field name="approved_message"/>
+            
+                    </group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="requires_approval"/>
+                        <field name="max_amount"/>
+                        <field name="count_submitted"/>
+                        <field name="count_approved"/>
+                        <field name="count_rejected"/>
+                        <field name="period_use"/>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_hr_employee_benefit" model="ir.actions.act_window">
+        <field name="name">Employee Benefits</field>
+        <field name="res_model">hr.employee.benefit</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

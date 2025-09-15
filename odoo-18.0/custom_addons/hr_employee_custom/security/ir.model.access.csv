@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_benefit_user,access_employee_benefit_user,model_hr_employee_benefit,base.group_user,1,1,1,1
+access_employee_benefit_usage_user,access_employee_benefit_usage_user,model_hr_employee_benefit_usage,base.group_user,1,1,1,1
+

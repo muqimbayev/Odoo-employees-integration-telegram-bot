@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_hr_employee_benefit_usage_tree" model="ir.ui.view">
+    <field name="name">hr.employee.benefit.usage.tree</field>
+    <field name="model">hr.employee.benefit.usage</field>
+    <field name="arch" type="xml">
+        <list string="Benefit Usages">
+            <field name="employee_id"/>
+            <field name="state"/>
+            <field name="date_requested"/>
+            <field name="approved_by"/>
+        </list>
+    </field>
+</record>
+
+</odoo>

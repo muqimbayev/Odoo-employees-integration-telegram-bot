@@ -1,0 +1,35 @@
+<odoo>
+    <record id="hr_employee_views_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.inherit_benefit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet//notebook" position="inside">
+                <page string="Usage Benefit" name="benefit_ids">
+                    <field name="benefit_ids">
+                        <list editable="bottom">
+                            <field name="benefit_id"/>
+                            <field name="state"/>
+                            <field name="date_requested"/>
+                            <field name="approved_by"/>
+                        </list>
+                    </field>
+                </page>
+                <page string="Appropriate benefits" name="appropriate_benefit_ids">
+                    <field name="appropriate_benefit_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="benefit_type"/>
+                            <field name="max_amount"/>
+                            <field name="requires_approval"/>
+
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+
+        </field>
+
+    </record>
+</odoo>
