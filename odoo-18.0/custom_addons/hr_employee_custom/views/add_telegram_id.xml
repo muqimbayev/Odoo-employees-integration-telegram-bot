@@ -7,7 +7,6 @@
             <xpath expr="//group[@name='identification_group']" position="inside">
                 <field name="telegram_id" widget="char"/>
             </xpath>
-
         </field>
     </record>
 </odoo>

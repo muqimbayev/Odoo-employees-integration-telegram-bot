@@ -13,6 +13,7 @@
             </list>
         </field>
     </record>
+
     <record id="employee_benefit_views_form" model="ir.ui.view">
         <field name="name">employee.benefit.form</field>
         <field name="model">hr.employee.benefit</field>
@@ -21,22 +22,22 @@
                 <sheet>
                    <div class="oe_button_box" name="button_box">
 
-    <button name="count_submitted_button" type="object"
-        class="oe_stat_button" icon="fa-file">
-        <field name="count_submitted" widget="statinfo" string="Tasdiqlanishi kerak"/>
-    </button>
+                        <button name="count_submitted_button" type="object"
+                            class="oe_stat_button" icon="fa-file">
+                            <field name="count_submitted" widget="statinfo" string="Tasdiqlanishi kerak"/>
+                        </button>
 
-    <button name="count_approved_button" type="object"
-        class="oe_stat_button" icon="fa-check-circle">
-        <field name="count_approved" widget="statinfo" string="Tasdiqlanganlar"/>
-    </button>
+                        <button name="count_approved_button" type="object"
+                            class="oe_stat_button" icon="fa-check-circle">
+                            <field name="count_approved" widget="statinfo" string="Tasdiqlanganlar"/>
+                        </button>
 
-    <button name="count_rejected_button" type="object"
-        class="oe_stat_button" icon="fa-times-circle">
-        <field name="count_rejected" widget="statinfo" string="Rad etilganlar"/>
-    </button>
+                        <button name="count_rejected_button" type="object"
+                            class="oe_stat_button" icon="fa-times-circle">
+                            <field name="count_rejected" widget="statinfo" string="Rad etilganlar"/>
+                        </button>
 
-</div>
+                    </div>
 
 
                 <group>

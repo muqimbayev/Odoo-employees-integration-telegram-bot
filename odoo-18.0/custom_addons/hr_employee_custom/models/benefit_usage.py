@@ -49,18 +49,3 @@ class HrEmployeeBenefitUsage(models.Model):
             if new_state == "rejected" and not new_reason:
                 raise ValidationError("Rejection Reason cannot be empty")
         return super().write(vals)
-
-    @api.depends('approved_date')
-    def _compute_stoped_date(self):
-        for record in self:
-            record.stoped_date = False  
-            if record.approved_date:
-                period = record.benefit_id.period_use
-                period_days = record.benefit_id.period_use_days or 0
-                if period == 'one_month':
-                    record.stoped_date = record.approved_date + relativedelta(months=1)
-                elif period == 'one_year':
-                    record.stoped_date = record.approved_date + relativedelta(years=1)
-                elif period == 'other' and period_days > 0:
-                    record.stoped_date = record.approved_date + relativedelta(days=period_days)
-    

@@ -24,21 +24,34 @@ class HrEmployee(models.Model):
             else:
                 employee.months_worked = 0
 
+    
     @api.depends("months_worked")
     def _compute_appropriate_benefit_ids(self):
         for record in self:
-            benefits = self.env['hr.employee.benefit'].search([('is_active', '=', True)])
-            record.appropriate_benefit_ids = benefits.filtered(
-                lambda b: (
-                            (
-                                b.eligibility_start <= record.months_worked and b.eligibility_end >= record.months_worked)
-                                  or (b.eligibility_start <= record.months_worked and b.eligibility_end == 0)
-                                  or (b.eligibility_start == 0 and b.eligibility_end == 0)
-                                  or (b.eligibility_start == 0 and b.eligibility_end >= record.months_worked)
-                          )
-                          and (not b.department_ids or record.department_id.id in b.department_ids.ids)
-                          and(not b.company_ids or record.company_id.id in b.company_ids.ids)
+            benefits = self.env["hr.employee.benefit"].search([("is_active", "=", True)])
+            appropriate_benefits = []
+            for b in benefits:
+                count = self.env["hr.employee.benefit.usage"].search_count([
+                    ("employee_id", "=", record.id),
+                    ("benefit_id", "=", b.id),
+                    ("state", "!=", "rejected"),
+                ])
+
+                eligibility_ok = (
+                    (b.eligibility_start <= record.months_worked and b.eligibility_end >= record.months_worked)
+                    or (b.eligibility_start <= record.months_worked and b.eligibility_end == 0)
+                    or (b.eligibility_start == 0 and b.eligibility_end == 0)
+                    or (b.eligibility_start == 0 and b.eligibility_end >= record.months_worked)
                 )
+                department_ok = not b.department_ids or record.department_id.id in b.department_ids.ids
+                company_ok = not b.company_ids or record.company_id.id in b.company_ids.ids
+
+                max_amount_ok = not b.max_amount or count < b.max_amount
+
+                if eligibility_ok and department_ok and company_ok and max_amount_ok:
+                    appropriate_benefits.append(b.id)
+
+            record.appropriate_benefit_ids = [(6, 0, appropriate_benefits)]
 
     @api.depends()
     def _compute_work_days(self):
